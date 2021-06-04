@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`walliSchema should spec 1`] = `
+String {
+  "isRequired": true,
+  "msg": null,
+  "options": Object {
+    "type": [Function],
+    "typeName": "string",
+  },
+  "rule": [Function],
+  "toString": [Function],
+}
+`;

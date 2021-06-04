@@ -31,8 +31,8 @@ type ToWalliOptions = {
 }
 
 export function createSchemaToWalli<T extends WalliSet | any>(walliSet: T) {
-  // @ts-ignore
   return function schemaToWalli<R extends Verifiable = Verifiable>(
+    // @ts-ignore
     schema: WalliSchema<keyof T>,
     opts?: ToWalliOptions
   ) {

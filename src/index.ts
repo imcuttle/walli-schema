@@ -73,9 +73,9 @@ export function createSchemaToWalli<T extends WalliSet | any>(walliSet: T) {
             if (!isObject(rule)) {
               return rule
             }
-            // @ts-ignore
             return mapObj(
               rule,
+              // @ts-ignore
               (key: any, sourceValue: any) => {
                 if (isObject(sourceValue)) {
                   return [key, schemaToWalli(sourceValue, opts)]

@@ -9,7 +9,14 @@ import * as mapObj from 'map-obj'
 import { Verifiable } from 'walli'
 
 type Rule<T extends Verifiable = Verifiable> = ((rule: any, opts: any) => T) | ((...args: any[]) => T) | T
-const isObject = (value) => typeof value === 'object' && value !== null
+function isPlainObject(value) {
+  if (Object.prototype.toString.call(value) !== '[object Object]') {
+    return false
+  }
+
+  const prototype = Object.getPrototypeOf(value)
+  return prototype === null || prototype === Object.prototype
+}
 
 export type WalliSet<T extends Verifiable = Verifiable> = {
   [type: string]: Rule<T>
@@ -70,22 +77,21 @@ export function createSchemaToWalli<T extends WalliSet | any>(walliSet: T) {
             if (Array.isArray(rule)) {
               return rule.map((r) => mapRule(r))
             }
-            if (!isObject(rule)) {
+            if (!isPlainObject(rule)) {
               return rule
             }
             return mapObj(
               rule,
               // @ts-ignore
               (key: any, sourceValue: any) => {
-                if (isObject(sourceValue)) {
+                if (isPlainObject(sourceValue)) {
                   return [key, schemaToWalli(sourceValue, opts)]
                 }
-                return [key, schema]
+                return [key, sourceValue]
               },
               { deep: false }
             )
           }
-
           rootVerifiable = walliInstance(mapRule(rule), options)
           if (required) {
             rootVerifiable = rootVerifiable.required

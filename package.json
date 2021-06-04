@@ -83,6 +83,7 @@
   },
   "dependencies": {
     "@moyuyc/visit-tree": "^4.0.2",
-    "lodash.clonedeep": "^4.5.0"
+    "lodash.clonedeep": "^4.5.0",
+    "map-obj": "^4.2.1"
   }
 }

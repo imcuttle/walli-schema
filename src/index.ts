@@ -5,9 +5,11 @@
 import * as w from 'walli'
 import * as clone from 'lodash.clonedeep'
 import { sync as visit } from '@moyuyc/visit-tree'
+import * as mapObj from 'map-obj'
 import { Verifiable } from 'walli'
 
 type Rule<T extends Verifiable = Verifiable> = ((rule: any, opts: any) => T) | ((...args: any[]) => T) | T
+const isObject = (value) => typeof value === 'object' && value !== null
 
 export type WalliSet<T extends Verifiable = Verifiable> = {
   [type: string]: Rule<T>
@@ -64,7 +66,27 @@ export function createSchemaToWalli<T extends WalliSet | any>(walliSet: T) {
         }
 
         if (typeof walliInstance === 'function') {
-          rootVerifiable = walliInstance(rule, options)
+          const mapRule = (rule) => {
+            if (Array.isArray(rule)) {
+              return rule.map((r) => mapRule(r))
+            }
+            if (!isObject(rule)) {
+              return rule
+            }
+            // @ts-ignore
+            return mapObj(
+              rule,
+              (key: any, sourceValue: any) => {
+                if (isObject(sourceValue)) {
+                  return [key, schemaToWalli(sourceValue, opts)]
+                }
+                return [key, schema]
+              },
+              { deep: false }
+            )
+          }
+
+          rootVerifiable = walliInstance(mapRule(rule), options)
           if (required) {
             rootVerifiable = rootVerifiable.required
           } else if (optional) {

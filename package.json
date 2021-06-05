@@ -1,6 +1,6 @@
 {
   "name": "walli-schema",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "walli schema to walli",
   "author": "imcuttle <moyuyc95@gmail.com>",
   "scripts": {

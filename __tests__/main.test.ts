@@ -5,6 +5,20 @@
  */
 import { schemaToWalli } from '../src'
 
+import { sync as visit } from '@moyuyc/visit-tree'
+
+const getRules = (v) => {
+  let nodes: any[] = []
+  visit(
+    v,
+    (node) => {
+      nodes.push(node)
+    },
+    { path: 'rule' }
+  )
+  return nodes
+}
+
 describe('walliSchema', function () {
   it('should spec', function () {
     expect(
@@ -89,5 +103,59 @@ describe('walliSchema', function () {
         c: 2
       })
     ).toBeTruthy()
+  })
+
+  it('should deep passed', function () {
+    const verifiable = schemaToWalli({
+      $type: 'leq',
+      rule: {
+        $type: 'every',
+        rule: [
+          {
+            $type: 'leq',
+            rule: {
+              a: {
+                x: 1,
+                y: 2
+              },
+              d: [
+                {
+                  x: 1,
+                  y: 2
+                },
+                {
+                  $type: 'eq',
+                  rule: {
+                    x: 1,
+                    y: 2
+                  }
+                }
+              ]
+            }
+          },
+          {
+            $type: 'oneOf',
+            rule: [
+              {
+                $type: 'leq',
+                rule: {
+                  b: 2,
+                  c: 3
+                }
+              },
+              {
+                $type: 'leq',
+                rule: {
+                  b: 3,
+                  c: 2
+                }
+              }
+            ]
+          }
+        ]
+      }
+    })
+
+    expect(getRules(verifiable)).toMatchSnapshot()
   })
 })

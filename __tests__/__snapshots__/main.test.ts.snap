@@ -1,5 +1,277 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`walliSchema should deep passed 1`] = `
+Array [
+  LooseEqual {
+    "_eq": [Function],
+    "isRequired": true,
+    "msg": null,
+    "options": Object {
+      "loose": true,
+    },
+    "rule": Every {
+      "isRequired": true,
+      "msg": null,
+      "options": Object {},
+      "rule": Array [
+        LooseEqual {
+          "_eq": [Function],
+          "isRequired": true,
+          "msg": null,
+          "options": Object {
+            "loose": true,
+          },
+          "rule": Object {
+            "a": Object {
+              "x": 1,
+              "y": 2,
+            },
+            "d": Array [
+              Object {
+                "x": 1,
+                "y": 2,
+              },
+              Equal {
+                "_eq": [Function],
+                "isRequired": true,
+                "msg": null,
+                "options": Object {
+                  "loose": false,
+                },
+                "rule": Object {
+                  "x": 1,
+                  "y": 2,
+                },
+              },
+            ],
+          },
+        },
+        OneOf {
+          "isRequired": true,
+          "msg": null,
+          "options": Object {},
+          "rule": Array [
+            LooseEqual {
+              "_eq": [Function],
+              "isRequired": true,
+              "msg": null,
+              "options": Object {
+                "loose": true,
+              },
+              "rule": Object {
+                "b": 2,
+                "c": 3,
+              },
+            },
+            LooseEqual {
+              "_eq": [Function],
+              "isRequired": true,
+              "msg": null,
+              "options": Object {
+                "loose": true,
+              },
+              "rule": Object {
+                "b": 3,
+                "c": 2,
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+  Every {
+    "isRequired": true,
+    "msg": null,
+    "options": Object {},
+    "rule": Array [
+      LooseEqual {
+        "_eq": [Function],
+        "isRequired": true,
+        "msg": null,
+        "options": Object {
+          "loose": true,
+        },
+        "rule": Object {
+          "a": Object {
+            "x": 1,
+            "y": 2,
+          },
+          "d": Array [
+            Object {
+              "x": 1,
+              "y": 2,
+            },
+            Equal {
+              "_eq": [Function],
+              "isRequired": true,
+              "msg": null,
+              "options": Object {
+                "loose": false,
+              },
+              "rule": Object {
+                "x": 1,
+                "y": 2,
+              },
+            },
+          ],
+        },
+      },
+      OneOf {
+        "isRequired": true,
+        "msg": null,
+        "options": Object {},
+        "rule": Array [
+          LooseEqual {
+            "_eq": [Function],
+            "isRequired": true,
+            "msg": null,
+            "options": Object {
+              "loose": true,
+            },
+            "rule": Object {
+              "b": 2,
+              "c": 3,
+            },
+          },
+          LooseEqual {
+            "_eq": [Function],
+            "isRequired": true,
+            "msg": null,
+            "options": Object {
+              "loose": true,
+            },
+            "rule": Object {
+              "b": 3,
+              "c": 2,
+            },
+          },
+        ],
+      },
+    ],
+  },
+  LooseEqual {
+    "_eq": [Function],
+    "isRequired": true,
+    "msg": null,
+    "options": Object {
+      "loose": true,
+    },
+    "rule": Object {
+      "a": Object {
+        "x": 1,
+        "y": 2,
+      },
+      "d": Array [
+        Object {
+          "x": 1,
+          "y": 2,
+        },
+        Equal {
+          "_eq": [Function],
+          "isRequired": true,
+          "msg": null,
+          "options": Object {
+            "loose": false,
+          },
+          "rule": Object {
+            "x": 1,
+            "y": 2,
+          },
+        },
+      ],
+    },
+  },
+  Object {
+    "a": Object {
+      "x": 1,
+      "y": 2,
+    },
+    "d": Array [
+      Object {
+        "x": 1,
+        "y": 2,
+      },
+      Equal {
+        "_eq": [Function],
+        "isRequired": true,
+        "msg": null,
+        "options": Object {
+          "loose": false,
+        },
+        "rule": Object {
+          "x": 1,
+          "y": 2,
+        },
+      },
+    ],
+  },
+  OneOf {
+    "isRequired": true,
+    "msg": null,
+    "options": Object {},
+    "rule": Array [
+      LooseEqual {
+        "_eq": [Function],
+        "isRequired": true,
+        "msg": null,
+        "options": Object {
+          "loose": true,
+        },
+        "rule": Object {
+          "b": 2,
+          "c": 3,
+        },
+      },
+      LooseEqual {
+        "_eq": [Function],
+        "isRequired": true,
+        "msg": null,
+        "options": Object {
+          "loose": true,
+        },
+        "rule": Object {
+          "b": 3,
+          "c": 2,
+        },
+      },
+    ],
+  },
+  LooseEqual {
+    "_eq": [Function],
+    "isRequired": true,
+    "msg": null,
+    "options": Object {
+      "loose": true,
+    },
+    "rule": Object {
+      "b": 2,
+      "c": 3,
+    },
+  },
+  Object {
+    "b": 2,
+    "c": 3,
+  },
+  LooseEqual {
+    "_eq": [Function],
+    "isRequired": true,
+    "msg": null,
+    "options": Object {
+      "loose": true,
+    },
+    "rule": Object {
+      "b": 3,
+      "c": 2,
+    },
+  },
+  Object {
+    "b": 3,
+    "c": 2,
+  },
+]
+`;
+
 exports[`walliSchema should spec 1`] = `
 String {
   "isRequired": true,

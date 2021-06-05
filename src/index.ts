@@ -47,6 +47,9 @@ export function createSchemaToWalli<T extends WalliSet | any>(walliSet: T) {
   ) {
     let rootVerifiable: any
     const { silent = false, throwError } = opts || {}
+    if (typeof schema !== 'object' || !schema?.$type) {
+      return schema as any
+    }
 
     const cloned = clone(schema)
     visit(
@@ -80,14 +83,16 @@ export function createSchemaToWalli<T extends WalliSet | any>(walliSet: T) {
             if (!isPlainObject(rule)) {
               return rule
             }
+
+            if (rule.$type) {
+              return schemaToWalli(rule, opts)
+            }
+
             return mapObj(
               rule,
               // @ts-ignore
               (key: any, sourceValue: any) => {
-                if (isPlainObject(sourceValue)) {
-                  return [key, schemaToWalli(sourceValue, opts)]
-                }
-                return [key, sourceValue]
+                return [key, mapRule(sourceValue)]
               },
               { deep: false }
             )

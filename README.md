@@ -9,6 +9,8 @@
 
 > walli schema to walli
 
+See [walli](https://github.com/imcuttle/walli)
+
 ## Installation
 
 ```bash
@@ -23,38 +25,44 @@ yarn add walli-schema
 import { schemaToWalli, createSchemaToWalli } from 'walli-schema'
 
 const verifiable = schemaToWalli({
-  $type: 'leq',
-  rule: {
-    $type: 'every',
-    rule: [
-      {
-        $type: 'leq',
-        rule: {
-          a: 1
-        }
-      },
-      {
-        $type: 'oneOf',
-        rule: [
-          {
-            $type: 'leq',
-            rule: {
-              b: 2,
-              c: 3
-            }
-          },
-          {
-            $type: 'leq',
-            rule: {
-              b: 3,
-              c: 2
-            }
-          }
-        ]
+  $type: 'every',
+  rule: [
+    {
+      $type: 'leq',
+      rule: {
+        a: 1
       }
-    ]
-  }
+    },
+    {
+      $type: 'oneOf',
+      rule: [
+        {
+          $type: 'leq',
+          rule: {
+            b: 2,
+            c: 3
+          }
+        },
+        {
+          $type: 'leq',
+          rule: {
+            b: 3,
+            c: 2
+          }
+        }
+      ]
+    }
+  ]
 })
+
+// => equals
+walli.every([
+    walli.leq({ a: 1 }),
+    walli.oneOf([
+        walli.leq({b: 2, c: 3}),
+        walli.leq({b: 3, c: 2}),
+    ]),
+])
 
 expect(
   verifiable.ok({

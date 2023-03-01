@@ -38,6 +38,38 @@ describe('walliSchema', function () {
         x: 1
       })
     ).toBeTruthy()
+
+    const w = schemaToWalli({
+      $type: 'leq',
+      rule: {
+        data: {
+          $type: 'leq',
+          rule: {
+            redirect: {
+              $type: 'trueLike'
+            }
+          }
+        }
+      }
+    })
+    expect(
+      w.ok({
+        data: {
+          redirect: null,
+          x: {}
+        }
+      })
+    ).toBeFalsy()
+
+    expect(
+      w.ok({
+        data: {
+          redirect: {
+            need_redirect: {}
+          }
+        }
+      })
+    ).toBeTruthy()
   })
 
   it('should deep', function () {
